@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "level.h"
 
 struct node{
 	int data;
@@ -16,7 +17,7 @@ struct node* new_node(int data){
 	newNode->left=NULL;
 	newNode->right=NULL;
 	
-	printf("new node created  %d\n", newNode->data);
+	printf("new node created  %d\n\n", newNode->data);
 	
 	return newNode; 
 }
@@ -127,7 +128,72 @@ void postOrder(struct node* root){
 
 
 int main(){
-	root=new_node(10);
+	
+	int dec_root=0;
+	int data, choice;
+	
+	while(choice!=5){
+		if(dec_root==0){
+			printf("=====   TREE IMPLEMENTATION   =====\n\n\n\n");
+			printf("===   Declare Root   ===\n");
+			scanf("%d", &data);
+			root=new_node(data);
+			dec_root=1;
+		}
+		else{
+			printf("\n\n===   Choose Option   ===\n");
+			printf("-------------------------\n\n\n");
+			printf("1)Insert Node\n\n2)Delete Node\n\n3)Search Node\n\n4)Traversal\n\n5)Exit\n\n\n\n");
+			scanf ("%d", &choice);
+			
+			switch(choice){
+				case 1: printf("Enter Node Data\n");
+				scanf("%d", &data);
+				insert(root,data);
+				break;
+				
+				case 2: printf("Enter Node Data\n");
+				scanf("%d", &data);
+				del(root,data);
+				break;
+				
+				case 3:printf("Enter Node Data\n");
+				scanf("%d",&data);
+				search(root,data);
+				break;
+				
+				case 4:
+					printf("\n===   Choose Traversal Method   ===\n");
+					printf("-------------------------------------\n\n\n");
+					printf("==   Breadth First Traversal   ==\n\n");
+					printf("1)Level Order Traversal\n\n\n");
+					printf("==   Depth First Traversal   ==\n\n");
+					printf("2)Pre Order\n\n3)In Order\n\n4)Post Order\n\n\n\n");
+					scanf("%d", &choice);
+					
+					switch (choice){
+						case 1: printf("Level Order Traversal ===> ");
+						levelOrder(root);
+						break;
+						case 2: printf("Pre Order Traversal ===> "); 
+						preOrder(root);
+						break;
+						case 3: printf("In Order Traversal ===> ");
+						inOrder(root);
+						break;
+						case 4:printf("Post Order Traversal ===> ");
+						postOrder(root);
+						break;
+						default: printf("Invalid choice\n");
+					}
+				break;
+				
+				case 5:break;	
+				default: printf("Invalid choice\n");
+			}
+		}
+	}
+	/*root=new_node(10);
 	insert(root, 4);
 	insert(root, 3);
 	insert(root, 20);
@@ -137,6 +203,7 @@ int main(){
 	inOrder(root);
 	preOrder(root);
 	postOrder(root);
+	levelOrder(root);
 	/*struct node*min;
 	root=new_node(5);
 	insert(root,3);
